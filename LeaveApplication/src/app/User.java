@@ -13,10 +13,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JSpinner;
 
 public class User extends JFrame {
 	private JTextField textField;
-	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -48,23 +53,18 @@ public class User extends JFrame {
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(220, 88, 126, 20);
+		textField.setBounds(233, 90, 102, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(220, 139, 126, 20);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
 		JLabel lblNewLabel_1 = new JLabel("Date");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(86, 89, 67, 19);
+		lblNewLabel_1.setBounds(72, 90, 67, 18);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Leave Type");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(86, 142, 78, 17);
+		lblNewLabel_2.setBounds(72, 119, 78, 22);
 		getContentPane().add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Submit");
@@ -75,8 +75,24 @@ public class User extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(165, 187, 89, 23);
+		btnNewButton.setBounds(167, 202, 89, 23);
 		getContentPane().add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addItem("Half Day");
+		comboBox.addItem("Full Day");
+		
+		comboBox.setBounds(233, 121, 102, 22);
+		getContentPane().add(comboBox);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setBounds(233, 157, 102, 20);
+		getContentPane().add(spinner);
+		
+		JLabel lblNewLabel_3 = new JLabel("How Many Days");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_3.setBounds(72, 159, 117, 23);
+		getContentPane().add(lblNewLabel_3);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	}
