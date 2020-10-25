@@ -10,6 +10,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Admin extends JFrame {
 
@@ -48,14 +50,18 @@ public class Admin extends JFrame {
 		lblNewLabel.setBounds(168, 35, 102, 32);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Reject");
+		JButton btnNewButton = new JButton("Reject Leave");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(212, 106, 102, 23);
+		btnNewButton.setBounds(223, 106, 152, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Approve");
+		JButton btnNewButton_1 = new JButton(" Approve Leave");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_1.setBounds(68, 106, 112, 23);
+		btnNewButton_1.setBounds(68, 106, 136, 23);
 		contentPane.add(btnNewButton_1);
 	}
 

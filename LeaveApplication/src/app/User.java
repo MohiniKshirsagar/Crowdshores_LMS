@@ -22,6 +22,8 @@ import javax.swing.JSpinner;
 
 public class User extends JFrame {
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -47,52 +49,67 @@ public class User extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("User");
+		JLabel lblNewLabel = new JLabel("Apply For Leaves");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 26));
-		lblNewLabel.setBounds(184, 27, 87, 32);
+		lblNewLabel.setBounds(93, 11, 331, 48);
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(233, 90, 102, 20);
+		textField.setBounds(77, 182, 258, 42);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Date");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(72, 90, 67, 18);
-		getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Leave Type");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(72, 119, 78, 22);
+		JLabel lblNewLabel_2 = new JLabel("Select Leave Type");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setBounds(77, 70, 117, 22);
 		getContentPane().add(lblNewLabel_2);
 		
-		JButton btnNewButton = new JButton("Submit");
+		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin a=new Admin();
-				a.setVisible(true);
+				AdminLogin al=new AdminLogin();
+				al.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(167, 202, 89, 23);
+		btnNewButton.setBounds(172, 227, 89, 23);
 		getContentPane().add(btnNewButton);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.addItem("Half Day");
-		comboBox.addItem("Full Day");
+		comboBox.addItem("Sick");
+		comboBox.addItem("Casual");
+		comboBox.addItem("Maternity");
+		comboBox.addItem("Public Holiday");
+		comboBox.addItem("Religious Holiday");
+		comboBox.addItem("Other");
 		
-		comboBox.setBounds(233, 121, 102, 22);
+		comboBox.setBounds(233, 72, 102, 22);
 		getContentPane().add(comboBox);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(233, 157, 102, 20);
-		getContentPane().add(spinner);
+		JLabel lblNewLabel_1 = new JLabel("From Date");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_1.setBounds(76, 103, 78, 14);
+		getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("How Many Days");
+		JLabel lblNewLabel_3 = new JLabel("To Date");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3.setBounds(72, 159, 117, 23);
+		lblNewLabel_3.setBounds(76, 127, 69, 14);
 		getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Description");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_4.setBounds(76, 152, 82, 32);
+		getContentPane().add(lblNewLabel_4);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(233, 101, 102, 20);
+		getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(233, 125, 102, 20);
+		getContentPane().add(textField_2);
+		textField_2.setColumns(10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	}
