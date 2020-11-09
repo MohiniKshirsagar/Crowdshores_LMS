@@ -14,14 +14,20 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import java.sql.*;
 import javax.swing.JPasswordField;
 
 public class AdminLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField Username;
+	private JPasswordField Password;
+	protected JLabel lblDisplay;
+
 
 	/**
 	 * Launch the application.
@@ -68,9 +74,49 @@ public class AdminLogin extends JFrame {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		btnNewButton.setBounds(160, 187, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		Username = new JTextField();
+		Username.setBounds(198, 92, 145, 20);
+		contentPane.add(Username);
+		Username.setColumns(10);
+		
+		Password = new JPasswordField();
+		Password.setBounds(198, 144, 145, 20);
+		contentPane.add(Password);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String username= textField.getText();
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","");
+					PreparedStatement psm=con.prepareStatement("insert into Admin(Username,Password) values(?,?);");
+							
+							psm.setString(1, Username.getText());
+							
+							psm.setString(2, Password.getText());
+							int y= psm.executeUpdate();
+							if(y>0) {
+								Admin a= new Admin();
+								a.setVisible(true);
+								
+								System.out.println("Login done Successfully..");
+								JOptionPane.showMessageDialog(null,"Login done Successfully..");
+								
+							}else {
+								System.out.println("Login failed..");
+								JOptionPane.showMessageDialog(null,"Invalid username or password");
+								
+									
+							}}catch(Exception e1) {
+								System.out.println(e1);
+							} 
+				
+
+			}
+				/*String username= textField.getText();
 				String pwd= passwordField.getText();
 			
 				if(username.equals("Admin")&& pwd.equals("password") ){
@@ -84,18 +130,18 @@ public class AdminLogin extends JFrame {
 				
 			}
 				
-			}
+			}*/
 		});
-		btnNewButton.setBounds(160, 187, 89, 23);
+	/*	btnNewButton.setBounds(160, 187, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(198, 90, 145, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		ID = new JTextField();
+		ID.setBounds(198, 90, 145, 20);
+		contentPane.add(ID);
+		ID.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(198, 144, 145, 20);
-		contentPane.add(passwordField);
+		Password = new JPasswordField();
+		Password.setBounds(198, 144, 145, 20);
+		contentPane.add(Password); */
 	}
 }

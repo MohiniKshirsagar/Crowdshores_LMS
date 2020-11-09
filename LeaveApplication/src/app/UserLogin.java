@@ -16,12 +16,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.sql.*;
 public class UserLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField username;
+	private JPasswordField password;
 	protected JLabel lblDisplay;
 
 	/**
@@ -64,40 +64,78 @@ public class UserLogin extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
+		username = new JTextField();
+		username.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {}
 				}
 		);
-		textField.setBounds(231, 94, 115, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		username.setBounds(231, 94, 115, 20);
+		contentPane.add(username);
+		username.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_2.setBounds(102, 134, 90, 19);
 		contentPane.add(lblNewLabel_2);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(231, 135, 115, 20);
-		contentPane.add(passwordField);
+		password = new JPasswordField();
+		password.setBounds(231, 135, 115, 20);
+		contentPane.add(password);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String username= textField.getText();
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","");
+					PreparedStatement ps=con.prepareStatement("insert into User(username,password) values(?,?);");
+							
+							ps.setString(1, username.getText());
+							
+							ps.setString(2, password.getText());
+							int x= ps.executeUpdate();
+							if(x>0) {
+								Apply u=new Apply();				
+							    u.setVisible(true);
+					
+								System.out.println("Login done Successfully..");
+								JOptionPane.showMessageDialog(null,"Login done Successfully..");
+								
+							}else {
+								
+								System.out.println("Login failed..");
+								JOptionPane.showMessageDialog(null,"Invalid username or password");
+								
+									
+							}}catch(Exception e1) {
+								System.out.println(e1);
+							} 
+				
+							
+			/*		Statement stmt=conn.createStatement();
+					String sql="Select " from tbLogin where UserName='"+user.getText()+"' and Password='"pass.getText();.toString()+"'";
+				ResultSet rs=stmt.executeQuery(sql);
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(null,"Login Successfully..");
+					}else {
+						JOptionPane.showMessageDialog(null,"Invalid username or password");
+						con.close();
+					}
+					
+				}catch(Exception e) {System.out.println(e);} */
+			/*	String username= textField.getText();
 				String pwd= passwordField.getText();
 				
-					if(username.equals("Mohini")&& pwd.equals("ABC@123") ){
+					if(username.equals("Mohini")&& pwd.equals("ABC@123") ){ 
 						User u=new User();				
-					    u.setVisible(true);
+					    u.setVisible(true);*/
 			
 					
-				}else {	 
+		/*	}else {	 
 					JOptionPane.showMessageDialog(null,"Invalid username or password");
 					
+				}*/
 				}
-			}
 			
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));

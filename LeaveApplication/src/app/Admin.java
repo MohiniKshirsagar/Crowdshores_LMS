@@ -8,10 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 public class Admin extends JFrame {
 
@@ -50,19 +57,54 @@ public class Admin extends JFrame {
 		lblNewLabel.setBounds(168, 35, 102, 32);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Reject Leave");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(223, 106, 152, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton(" Approve Leave");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Approve Leave");
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Status="Approved";
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_1.setBounds(68, 106, 136, 23);
-		contentPane.add(btnNewButton_1);
+		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		rdbtnNewRadioButton.setBounds(74, 112, 122, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Reject Leave");
+		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Status="Rejected";
+			}
+		});
+		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		rdbtnNewRadioButton_1.setBounds(263, 112, 115, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		
+		JButton btnNewButton = new JButton("Save");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try { 
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","");
+					PreparedStatement pst=con.prepareStatement("insert into Admin(Status) values(?);");
+					
+					pst.setString(1,Status);
+					
+					int p= pst.executeUpdate();
+					if(p>0) {
+						 Home hm=new Home();
+						 hm.setVisible(true);	
+                       
+					//	JOptionPane.showMessageDialog(null,"Leave status updated");
+						
+					}
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, ex);
+					
+				}
+			}
+		});
+	
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton.setBounds(168, 175, 89, 23);
+		contentPane.add(btnNewButton);
 	}
-
+	private String Status;
 }
